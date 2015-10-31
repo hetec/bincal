@@ -1,9 +1,7 @@
 package org.hetec.numerals;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigInteger;
-import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,9 +29,8 @@ public class CalcuateServlet extends HttpServlet {
             }else {
                 errMessage = "Missing input! Please enter a number.";
             }
-        }else{
-            errMessage = "Sorry, an unexpected error occured!";
         }
+        
         request.setAttribute("err", errMessage);
         request.setAttribute("bin", bin);
         request.setAttribute("dec", dec);

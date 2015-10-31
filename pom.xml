@@ -42,4 +42,5 @@
                 <scope>compile</scope>
             </dependency>
         </dependencies>
+    <name>bincal</name>
 </project>
