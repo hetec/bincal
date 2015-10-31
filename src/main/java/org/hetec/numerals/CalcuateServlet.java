@@ -16,32 +16,63 @@ public class CalcuateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String bin = request.getParameter("bin");
-        String dec = request.getParameter("dec");
-        String lastOne = request.getParameter("last");
+        String binaryNumber = request.getParameter("bin");
+        String decimalNumber = request.getParameter("dec");
+        String lastChangedValue = request.getParameter("last");
         String errMessage = "";
-        if(checkNotNullOrEmpty(lastOne)){
-            if(checkNotNullOrEmpty(bin) && "bin".equals(lastOne)){
-                final BinaryNumber tmp = BinaryNumber.of(bin);
-                dec = tmp.asBigInt().toString();
-            }else if(checkNotNullOrEmpty(dec) && "dec".equals(lastOne)){
-                bin = BinaryNumber.of(new BigInteger(dec)).toString();
-            }else {
-                errMessage = "Missing input! Please enter a number.";
-            }
-        }
+        
+        errMessage = this.handleConvertion(lastChangedValue, binaryNumber, decimalNumber, request);
         
         request.setAttribute("err", errMessage);
-        request.setAttribute("bin", bin);
-        request.setAttribute("dec", dec);
         RequestDispatcher reqDispatcher = request.getRequestDispatcher("index.jsp");
         reqDispatcher.forward(request, response);
     }
     
-    private static boolean checkNotNullOrEmpty(String s){
+    private boolean checkNotNullOrEmpty(String s){
         if(s != null)
             if(s.length() > 0)
                 return true;
         return false;
+    }
+    
+    private String handleConvertion(String lastChangedValue,
+                                  String binaryNumber,
+                                  String decimalNumber,
+                                  HttpServletRequest request){
+        String message = "";
+        
+        try {
+            if("bin".equals(lastChangedValue)){
+                decimalNumber = this.convertToDecimal(binaryNumber);
+                message = decimalNumber;
+            }else if("dec".equals(lastChangedValue)){
+                binaryNumber = this.convertToBinary(decimalNumber);
+                message = binaryNumber;
+            }
+        } catch (NumberFormatException numberFormatEx) {
+            message = "Your input has an illegal format! Please use only valid numbers.";
+        }
+        
+        request.setAttribute("bin", binaryNumber);
+        request.setAttribute("dec", decimalNumber);
+        
+        return message;
+    }
+    
+    private String convertToDecimal(String binaryNumber){
+        if(checkNotNullOrEmpty(binaryNumber)){
+            final BinaryNumber tmp = BinaryNumber.of(binaryNumber);
+            return tmp.asBigInt().toString();
+        }else{
+            return "";
+        }
+    }
+    
+    private String convertToBinary(String decimalNumber){
+        if(checkNotNullOrEmpty(decimalNumber)){
+            return BinaryNumber.of(new BigInteger(decimalNumber)).toString();
+        }else{
+            return "";
+        }
     }
 }
