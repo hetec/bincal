@@ -2,16 +2,18 @@
     <h1>Calculate binary numbers!</h1>
     
     <div class="calculationWrapper">
-        <form id="calculationForm">
+        <form id="calculationForm" action="calculate" method="get">
             <div class="calculationFieldWrapper">
                 <input type="text"
                    placeholder="110101..."
                    class="inputElement"
-                   id="calculationField"/>
+                   id="calculationField"
+                   name="binaryNumber"/>
             </div>
             <div class="operationAndField">
                 <select class="inputElement"
-                        id="operationField">
+                        id="operationField"
+                        name="operation">
                     <option>+</option>
                     <option>-</option>
                     <option>*</option>
@@ -20,9 +22,10 @@
                 <input type="text"
                        placeholder="1001..."
                        class="inputElement"
-                       id="contentField"/>
+                       id="contentField"
+                       name="binaryNumber"/>
             </div>
-                
+            <input type="submit" value="calc"/>
             
         </form>
         
