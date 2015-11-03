@@ -30,13 +30,9 @@ body {
 .inputElement {
     font-size: 20px;
     padding: 5px 20px;
-    color: #013220;
-}
-
-#bin, #dec {
-    width: 100%;
-    height: 50px;
     border-radius: 10px;
+    color: #013220;
+    height: 50px;
     padding: 5px 20px;
     border: none;
     outline: none;
@@ -45,23 +41,27 @@ body {
           box-sizing:   border-box;
 }
 
-#dec:focus, #bin:focus {
+#bin, #dec {
+    width: 100%;
+ 
+}
+
+.inputElement:focus{
     border: #6D9BC3 solid 5px;
     padding: 0px 15px;
 }
 
 #solve {
     padding: 0;
-    width: 40px;
-    height: 40px;
+    width: 120px;
+    height: 30px;
     border-radius: 10px;
     border: 5px solid #6D9BC3;
     color: #6D9BC3;
     margin: 0 auto;
     margin-top: 50px;
     text-align: center;
-    line-height: 35px;
-    font-size: 30px;
+    font-size: 16px;
 }
 
 #solve:hover {
@@ -73,6 +73,14 @@ body {
 h1 {
     text-align: center;
     color: #6D9BC3;
-    margin-top: 5%;
-    
+    margin-top: 5%;   
+}
+
+#calculationField{
+    width: 100%;
+}
+
+.calculationWrapper{
+    width: 400px;
+    margin: 0 auto;
 }

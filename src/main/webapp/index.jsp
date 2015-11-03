@@ -11,7 +11,7 @@
                value="${bin}"
                placeholder="Your binary number ...">
     </span>
-    <div id="solve" class="inputElement" type="submit" name="solve">&uarr;&darr;</div>
+    <div id="solve" class="inputElement" type="submit" name="solve">convert</div>
     <span class="wrapperOutput">
         <input 
                id = "dec"
