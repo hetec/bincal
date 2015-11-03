@@ -28,7 +28,7 @@
             <input type="submit" value="calc"/>
             
         </form>
-        
+        <h1>Result: ${result}</h1>
     </div>
     
     
