@@ -1,7 +1,7 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
 <p class="error">${err}</p>
 <h1>Binary To Decimal Converter</h1>
-<form id="input" action="calculate" method="get">
+<form id="input" action="convert" method="get">
     <span class="wrapperInput">
         <input 
                id = "bin"

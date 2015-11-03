@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hetc.binaryNumber.BinaryNumber;
 
-@WebServlet(name = "CalcuateServlet", urlPatterns = {"/calculate"})
-public class CalcuateServlet extends HttpServlet {
+@WebServlet(name = "ConversionServlet", urlPatterns = {"/convert"})
+public class ConversionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
