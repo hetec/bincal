@@ -78,9 +78,11 @@ h1 {
 
 #calculationField{
     width: 100%;
+    margin-top: 20px;
 }
 
 .calculationWrapper{
     width: 400px;
     margin: 0 auto;
+    margin-top: 10%;
 }

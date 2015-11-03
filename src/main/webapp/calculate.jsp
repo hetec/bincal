@@ -6,7 +6,12 @@
             <input type="text"
                    placeholder="110101..."
                    class="inputElement"
-                   id="calculationField"
+                   id="calculationField"/>
+            <input type="text"
+                   placeholder="1001..."
+                   class="inputElement"
+                   id="calculationField"/>
+            
         </form>
         
     </div>
