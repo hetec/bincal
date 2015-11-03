@@ -76,13 +76,46 @@ h1 {
     margin-top: 5%;   
 }
 
-#calculationField{
-    width: 100%;
+.calculationFieldWrapper{
+    width: 400px;
     margin-top: 20px;
+    display: block;
+}
+
+#calculationField{
+    width: 330px;
+    display: inline;
+    margin-left: 70px;
+}
+
+#operationField{
+    width: 50px;
+    display: inline;
+}
+
+#operationField option{
+    margin-left: 10px;
+}
+
+#contentField{
+    width: 330px;
+    float: right;
+    display: inline;
+}
+
+.operationAndField select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .calculationWrapper{
     width: 400px;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 20px;
+}
+
+.operationAndField{
+    display: block;
+    margin-top: 20px;
 }
