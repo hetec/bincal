@@ -46,9 +46,11 @@ public class CalculationServlet extends HttpServlet {
     
     private BinaryNumber calculate(BinaryNumber bin1, BinaryNumber bin2, String op){
         BinaryNumber result = null;
-        if("+".equals(op)){
-           result = bin1.add(bin2);
-        }
+//        if("+".equals(op)){
+//           result = bin1.add(bin2);
+//        }
+        
+        result = BasicOperation.fromString(op).apply(bin1, bin2);
         return result;
     }
 
