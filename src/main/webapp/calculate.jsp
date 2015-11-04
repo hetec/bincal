@@ -1,6 +1,6 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
     <h1>Calculate binary numbers!</h1>
-    
+    <h1>${message}</h1>
     <div class="calculationWrapper">
         <form id="calculationForm" action="calculate" method="get">
             <div class="calculationFieldWrapper">

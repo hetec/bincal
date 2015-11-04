@@ -21,7 +21,7 @@ public class ConversionServlet extends HttpServlet {
         String lastChangedValue = request.getParameter("last");
         String errMessage = "";
         
-        errMessage = this.handleConvertion(lastChangedValue, binaryNumber, decimalNumber, request);
+        errMessage = this.handleConversion(lastChangedValue, binaryNumber, decimalNumber, request);
         
         request.setAttribute("err", errMessage);
         RequestDispatcher reqDispatcher = request.getRequestDispatcher("index.jsp");
@@ -35,7 +35,7 @@ public class ConversionServlet extends HttpServlet {
         return false;
     }
     
-    private String handleConvertion(String lastChangedValue,
+    private String handleConversion(String lastChangedValue,
                                   String binaryNumber,
                                   String decimalNumber,
                                   HttpServletRequest request){

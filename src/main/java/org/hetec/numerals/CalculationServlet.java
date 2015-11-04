@@ -32,24 +32,38 @@ public class CalculationServlet extends HttpServlet {
         final String[] numbers = request.getParameterValues("binaryNumber");
         final String op = request.getParameter("operation");
         final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
-        request.setAttribute("result", this.calculate(binaryNumbers.get(0), binaryNumbers.get(1), op).asLong());
+        request.setAttribute("message", this.handleCalculation(binaryNumbers, op, request));
         rd.forward(request, response);
+        
+    }
+    
+    private String handleCalculation(List<BinaryNumber> binaryNumbers, String operation, HttpServletRequest request){
+        String message = "";
+        if(binaryNumbers.size() >= 2){
+            BinaryNumber bin1 = binaryNumbers.get(0);
+            BinaryNumber bin2 = binaryNumbers.get(1);
+            request.setAttribute("result", this.calculate(bin1, bin2, operation).asBigInt().toString());
+        }else{
+            message = "Too less arguments!";
+        }
+        
+        return message;
     }
     
     private List<BinaryNumber> convertParametersToBinaryNumbers(String[] binaryNumbers){
         List<BinaryNumber> bins = new ArrayList<>();
         for(String bin : binaryNumbers){
-            bins.add(BinaryNumber.of(bin));
+            try {
+                bins.add(BinaryNumber.of(bin));
+            } catch (IllegalArgumentException illegalArgEx) {
+                bins.add(BinaryNumber.ZERO);
+            }
         }
         return bins;
     }
     
     private BinaryNumber calculate(BinaryNumber bin1, BinaryNumber bin2, String op){
         BinaryNumber result = null;
-//        if("+".equals(op)){
-//           result = bin1.add(bin2);
-//        }
-        
         result = BasicOperation.fromString(op).apply(bin1, bin2);
         return result;
     }
