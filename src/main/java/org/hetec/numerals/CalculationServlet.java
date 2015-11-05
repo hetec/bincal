@@ -42,7 +42,11 @@ public class CalculationServlet extends HttpServlet {
         if(binaryNumbers.size() >= 2){
             BinaryNumber bin1 = binaryNumbers.get(0);
             BinaryNumber bin2 = binaryNumbers.get(1);
-            request.setAttribute("result", this.calculate(bin1, bin2, operation).asBigInt().toString());
+            try {
+                request.setAttribute("result", this.calculate(bin1, bin2, operation).asBigInt().toString());
+            } catch (ArithmeticException arithEx) {
+                message = "Sorry, division by zero is not allowed!";
+            }
         }else{
             message = "Too less arguments!";
         }
@@ -57,6 +61,7 @@ public class CalculationServlet extends HttpServlet {
                 bins.add(BinaryNumber.of(bin));
             } catch (IllegalArgumentException illegalArgEx) {
                 bins.add(BinaryNumber.ZERO);
+                
             }
         }
         return bins;
