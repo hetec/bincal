@@ -25,12 +25,15 @@ public class CalculationServlet extends HttpServlet {
 
     static final String RESULT = "result";
     static final String NUMBERS_PARAM = "binaryNumber";
+    static final String NUMBER1 = "number1";
+    static final String NUMBER2 = "number2";
     static final String OPERATION_PARAM = "operation";
     static final String MESSAGE = "message";
     static final String TARGET = "calculate.jsp";
     static final String MISSING_ARGUMENTS_EX = "Two binary numbers are necessary to process a valid calculation! ";
     static final String DIVISION_BY_ZERO_EX = "Sorry, division by zero is not allowed!";
     static final String NO_VALID_OP_EX = "No valid operation! Please use '+','-','*' or '/'! ";
+    static final String INVALID_FORMAT_EX = "Please use only valid binary numbers! ";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,9 +43,16 @@ public class CalculationServlet extends HttpServlet {
         final String[] numbers = request.getParameterValues(NUMBERS_PARAM);
         final String op = request.getParameter(OPERATION_PARAM);
         String message = validateParams(numbers,op);
+        restoreFieldValues(numbers,request);
         if(validateParams(numbers,op).isEmpty()){
-            final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
-            message = this.handleCalculation(binaryNumbers, op, request);
+            try {
+                final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
+                message = this.handleCalculation(binaryNumbers, op, request);
+            } catch (IllegalArgumentException illegalArgEx) {
+                message = INVALID_FORMAT_EX;
+            }
+
+
         }
         request.setAttribute(MESSAGE,message);
         rd.forward(request, response);
@@ -65,11 +75,7 @@ public class CalculationServlet extends HttpServlet {
     private List<BinaryNumber> convertParametersToBinaryNumbers(String[] binaryNumbers){
         List<BinaryNumber> bins = new ArrayList<>();
         for(String bin : binaryNumbers){
-            try {
-                bins.add(BinaryNumber.of(bin));
-            } catch (IllegalArgumentException illegalArgEx) {
-                bins.add(BinaryNumber.ZERO);
-            }
+            bins.add(BinaryNumber.of(bin));
         }
         return bins;
     }
@@ -92,7 +98,8 @@ public class CalculationServlet extends HttpServlet {
     }
 
     private void restoreFieldValues(String[] numbers, HttpServletRequest request){
-
+        request.setAttribute(NUMBER1, numbers[0]);
+        request.setAttribute(NUMBER2, numbers[1]);
     }
 
 

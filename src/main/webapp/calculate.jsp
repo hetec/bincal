@@ -5,6 +5,7 @@
             <div class="calculationFieldWrapper">
                 <input type="text"
                    placeholder="First binary number"
+                   value="${number1}"
                    class="inputElement"
                    id="calculationField"
                    name="binaryNumber"/>
@@ -20,6 +21,7 @@
                 </select>
                 <input type="text"
                        placeholder="Second binary number"
+                       value="${number2}"
                        class="inputElement"
                        id="contentField"
                        name="binaryNumber"/>
