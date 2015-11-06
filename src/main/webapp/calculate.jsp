@@ -6,7 +6,7 @@
         <form id="calculationForm" action="calculate" method="get">
             <div class="calculationFieldWrapper">
                 <input type="text"
-                   placeholder="110101..."
+                   placeholder="First binary number"
                    class="inputElement"
                    id="calculationField"
                    name="binaryNumber"/>
@@ -21,7 +21,7 @@
                     <option>/</option>
                 </select>
                 <input type="text"
-                       placeholder="1001..."
+                       placeholder="Second binary number"
                        class="inputElement"
                        id="contentField"
                        name="binaryNumber"/>
