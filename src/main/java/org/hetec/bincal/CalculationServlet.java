@@ -50,7 +50,7 @@ public class CalculationServlet extends HttpServlet {
             BinaryNumber bin1 = binaryNumbers.get(0);
             BinaryNumber bin2 = binaryNumbers.get(1);
             try {
-                request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).asBigInt().toString());
+                request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).toString());
             } catch (ArithmeticException arithEx) {
                 message = DIVISION_BY_ZERO_EX;
             }
