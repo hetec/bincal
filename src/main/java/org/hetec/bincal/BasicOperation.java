@@ -58,4 +58,12 @@ public enum BasicOperation {
     static BasicOperation fromString(String sign){
         return BasicOperation.signsToOps.get(sign);
     }
+
+    static boolean isValidOperation(String operation){
+        if(BasicOperation.fromString(operation) != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

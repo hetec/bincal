@@ -28,8 +28,9 @@ public class CalculationServlet extends HttpServlet {
     static final String OPERATION_PARAM = "operation";
     static final String MESSAGE = "message";
     static final String TARGET = "calculate.jsp";
-    static final String MISSING_ARGUMENTS_EX = "Too less arguments!";
+    static final String MISSING_ARGUMENTS_EX = "Two binary numbers are necessary to process a valid calculation! ";
     static final String DIVISION_BY_ZERO_EX = "Sorry, division by zero is not allowed!";
+    static final String NO_VALID_OP_EX = "No valid operation! Please use '+','-','*' or '/'! ";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,26 +39,26 @@ public class CalculationServlet extends HttpServlet {
         final RequestDispatcher rd = request.getRequestDispatcher(TARGET);
         final String[] numbers = request.getParameterValues(NUMBERS_PARAM);
         final String op = request.getParameter(OPERATION_PARAM);
-        final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
-        request.setAttribute(MESSAGE, this.handleCalculation(binaryNumbers, op, request));
+        String message = validateParams(numbers,op);
+        if(validateParams(numbers,op).isEmpty()){
+            final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
+            message = this.handleCalculation(binaryNumbers, op, request);
+        }
+        request.setAttribute(MESSAGE,message);
         rd.forward(request, response);
+
         
     }
     
     private String handleCalculation(List<BinaryNumber> binaryNumbers, String operation, HttpServletRequest request){
         String message = "";
-        if(binaryNumbers.size() >= 2){
-            BinaryNumber bin1 = binaryNumbers.get(0);
-            BinaryNumber bin2 = binaryNumbers.get(1);
-            try {
-                request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).toSignedString());
-            } catch (ArithmeticException arithEx) {
-                message = DIVISION_BY_ZERO_EX;
-            }
-        }else{
-            message = MISSING_ARGUMENTS_EX;
+        BinaryNumber bin1 = binaryNumbers.get(0);
+        BinaryNumber bin2 = binaryNumbers.get(1);
+        try {
+            request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).toSignedString());
+        } catch (ArithmeticException arithEx) {
+            message = DIVISION_BY_ZERO_EX;
         }
-        
         return message;
     }
     
@@ -77,6 +78,21 @@ public class CalculationServlet extends HttpServlet {
         BinaryNumber result = null;
         result = BasicOperation.fromString(op).apply(bin1, bin2);
         return result;
+    }
+
+    private String validateParams(String[] numbers, String op){
+        String message = "";
+        if(numbers.length < 2 || numbers[0].isEmpty() || numbers[1].isEmpty()) {
+            message += MISSING_ARGUMENTS_EX;
+        }
+        if(!BasicOperation.isValidOperation(op)){
+            message += NO_VALID_OP_EX;
+        }
+        return message;
+    }
+
+    private void restoreFieldValues(String[] numbers, HttpServletRequest request){
+
     }
 
 
