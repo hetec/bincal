@@ -70,7 +70,7 @@ public class ConversionServlet extends HttpServlet {
     
     private String convertToBinary(String decimalNumber){
         if(checkNotNullOrEmpty(decimalNumber)){
-            return BinaryNumber.of(new BigInteger(decimalNumber)).toString();
+            return BinaryNumber.of(new BigInteger(decimalNumber)).toSignedString();
         }else{
             return "";
         }
