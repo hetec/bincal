@@ -1,4 +1,4 @@
-package org.hetec.numerals;
+package org.hetec.bincal;
 
 import java.io.IOException;
 import java.math.BigInteger;

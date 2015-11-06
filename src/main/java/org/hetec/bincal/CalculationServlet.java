@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.hetec.numerals;
+package org.hetec.bincal;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,14 +23,23 @@ import org.hetc.binaryNumber.BinaryNumber;
 @WebServlet(name = "CalculationServlet", urlPatterns = {"/calculate"})
 public class CalculationServlet extends HttpServlet {
 
+    static final String RESULT = "result";
+    static final String NUMBERS_PARAM = "binaryNumber";
+    static final String OPERATION_PARAM = "operation";
+    static final String MESSAGE = "message";
+    static final String TARGET = "calculate.jsp";
+    static final String MISSING_ARGUMENTS_EX = "Too less arguments!";
+    static final String DIVISION_BY_ZERO_EX = "Sorry, division by zero is not allowed!";
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
-        final RequestDispatcher rd = request.getRequestDispatcher("calculate.jsp");
-        final String[] numbers = request.getParameterValues("binaryNumber");
-        final String op = request.getParameter("operation");
+        final RequestDispatcher rd = request.getRequestDispatcher(TARGET);
+        final String[] numbers = request.getParameterValues(NUMBERS_PARAM);
+        final String op = request.getParameter(OPERATION_PARAM);
         final List<BinaryNumber> binaryNumbers = this.convertParametersToBinaryNumbers(numbers);
-        request.setAttribute("message", this.handleCalculation(binaryNumbers, op, request));
+        request.setAttribute(MESSAGE, this.handleCalculation(binaryNumbers, op, request));
         rd.forward(request, response);
         
     }
@@ -43,12 +50,12 @@ public class CalculationServlet extends HttpServlet {
             BinaryNumber bin1 = binaryNumbers.get(0);
             BinaryNumber bin2 = binaryNumbers.get(1);
             try {
-                request.setAttribute("result", this.calculate(bin1, bin2, operation).asBigInt().toString());
+                request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).asBigInt().toString());
             } catch (ArithmeticException arithEx) {
-                message = "Sorry, division by zero is not allowed!";
+                message = DIVISION_BY_ZERO_EX;
             }
         }else{
-            message = "Too less arguments!";
+            message = MISSING_ARGUMENTS_EX;
         }
         
         return message;
