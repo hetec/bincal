@@ -61,7 +61,6 @@ public class CalculationServlet extends HttpServlet {
                 bins.add(BinaryNumber.of(bin));
             } catch (IllegalArgumentException illegalArgEx) {
                 bins.add(BinaryNumber.ZERO);
-                
             }
         }
         return bins;
