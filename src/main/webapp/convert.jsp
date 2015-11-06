@@ -1,26 +1,27 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
-<p class="error">${err}</p>
-<h1>Binary To Decimal Converter</h1>
-<form id="input" action="convert" method="get">
-    <span class="wrapperInput">
-        <input 
-               id = "bin"
-               class="inputElement"
-               type="text"
-               name="bin"
-               value="${bin}"
-               placeholder="Your binary number ...">
-    </span>
-    <div id="solve" class="solve" class="inputElement" type="submit" name="solve">convert</div>
-    <span class="wrapperOutput">
-        <input 
-               id = "dec"
-               class="inputElement"
-               type="text"
-               name="dec"
-               value="${dec}"
-               placeholder="Your decimal number ...">
-    </span>
-    <input id="last" type="hidden" name="last">
-</form>
+<div id="convertContainer">
+    <form id="input" action="convert" method="get">
+        <span class="wrapperInput">
+            <input
+                   id = "bin"
+                   class="inputElement"
+                   type="text"
+                   name="bin"
+                   value="${bin}"
+                   placeholder="Your binary number ...">
+        </span>
+        <button id="solve" class="solveButton" class="inputElement" type="submit" name="solve">convert</button>
+        <span class="wrapperOutput">
+            <input
+                   id = "dec"
+                   class="inputElement"
+                   type="text"
+                   name="dec"
+                   value="${dec}"
+                   placeholder="Your decimal number ...">
+        </span>
+        <input id="last" type="hidden" name="last">
+    </form>
+    <p class="error">${err}</p>
+</div>
 <%@include file="WEB-INF/jspf/footer.jspf"%>

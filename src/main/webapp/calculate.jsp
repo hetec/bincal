@@ -1,7 +1,5 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
 <div id="calcContainer">
-    <h1>Calculate binary numbers!</h1>
-    <h1>${message}</h1>
     <div class="calculationWrapper">
         <form id="calculationForm" action="calculate" method="get">
             <div class="calculationFieldWrapper">
@@ -15,10 +13,10 @@
                 <select class="inputElement"
                         id="operationField"
                         name="operation">
-                    <option>+</option>
-                    <option>-</option>
-                    <option>*</option>
-                    <option>/</option>
+                    <option value="+">&plus;</option>
+                    <option value="-">&minus;</option>
+                    <option value="*">&times;</option>
+                    <option value="/">&divide;</option>
                 </select>
                 <input type="text"
                        placeholder="Second binary number"
@@ -26,13 +24,14 @@
                        id="contentField"
                        name="binaryNumber"/>
             </div>
-            <input type="submit" value="calculate" class="solve" id="solve_calc"/>
+            <input type="submit" value="calculate" class="solveButton" id="solve_calc"/>
         </form>
     </div>
     <div id="resultContainer">
         <h3 id="resultHeading">RESULT</h3>
         <div id="result">
             ${result}
+            ${message}
         </div>
     </div>
 </div>

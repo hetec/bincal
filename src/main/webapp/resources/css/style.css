@@ -1,16 +1,19 @@
+body, html{
+    height:100%;
+}
+
 body {
     padding:0;
     margin:0;
     width: 100%;
-    height:100%;
-    background-color: #36454F;
+    /*background-color: #36454F;*/
     font-family: sans-serif;
     font-weight: 100;
 
 }
 .wrapperInput {
     margin: 0 auto;
-    margin-top: 10%;
+    /*margin-top: 10%;*/
     display: block;
     width: 70%;
 }
@@ -53,7 +56,10 @@ body {
     padding: 0px 15px;
 }
 
-.solve {
+.solveButton {
+    position: relative;
+    left: 50%;
+    margin-left: -60px;
     padding: 0;
     width: 120px;
     height: 30px;
@@ -61,13 +67,12 @@ body {
     border: 5px solid #6D9BC3;
     background-color: transparent;
     color: #6D9BC3;
-    margin: 0 auto;
     margin-top: 50px;
     text-align: center;
     font-size: 16px;
 }
 
-#solve:hover {
+.solveButton:hover {
     cursor: pointer;
     color: #36454F;
     background-color: #6D9BC3
@@ -77,6 +82,18 @@ h1 {
     text-align: center;
     color: #6D9BC3;
     margin-top: 5%;   
+}
+#convertContainer{
+    background-color: #36454F;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    height: 100%;
+}
+
+#calcContainer{
+    background-color: #36454F;
+    padding-top: 80px;
+
 }
 
 .calculationFieldWrapper{
@@ -93,13 +110,11 @@ h1 {
 
 #operationField{
     width: 50px;
-    background-color: white;
+    background-color: #6D9BC3;
+    color: white;
     display: inline;
 }
 
-#operationField option{
-    margin-left: 10px;
-}
 
 #contentField{
     width: 530px;
@@ -125,7 +140,7 @@ h1 {
 }
 
 #solve_calc {
-    float: right;
+    /*float: right;*/
 }
 
 #resultContainer {
@@ -133,7 +148,7 @@ h1 {
     position:relative;
     bottom:0;
     min-height:200px;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     width:100%;
     font-size: 30px;
     letter-spacing: 2px;
@@ -141,6 +156,8 @@ h1 {
 
 #resultHeading {
     margin: 0;
+    margin-left:5px;
+    padding-top: 5px;
     color: lightgray;
     font-weight: 100;
     font-size: 16px;
