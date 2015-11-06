@@ -1,11 +1,13 @@
 body {
+    padding:0;
+    margin:0;
     width: 100%;
-    margin: 0;
+    height:100%;
     background-color: #36454F;
     font-family: sans-serif;
     font-weight: 100;
-}
 
+}
 .wrapperInput {
     margin: 0 auto;
     margin-top: 10%;
@@ -51,12 +53,13 @@ body {
     padding: 0px 15px;
 }
 
-#solve {
+.solve {
     padding: 0;
     width: 120px;
     height: 30px;
     border-radius: 10px;
     border: 5px solid #6D9BC3;
+    background-color: transparent;
     color: #6D9BC3;
     margin: 0 auto;
     margin-top: 50px;
@@ -77,19 +80,20 @@ h1 {
 }
 
 .calculationFieldWrapper{
-    width: 400px;
+    width: 600px;
     margin-top: 20px;
     display: block;
 }
 
 #calculationField{
-    width: 330px;
+    width: 530px;
     display: inline;
     margin-left: 70px;
 }
 
 #operationField{
     width: 50px;
+    background-color: white;
     display: inline;
 }
 
@@ -98,7 +102,7 @@ h1 {
 }
 
 #contentField{
-    width: 330px;
+    width: 530px;
     float: right;
     display: inline;
 }
@@ -110,7 +114,7 @@ h1 {
 }
 
 .calculationWrapper{
-    width: 400px;
+    width: 600px;
     margin: 0 auto;
     margin-top: 20px;
 }
@@ -118,4 +122,43 @@ h1 {
 .operationAndField{
     display: block;
     margin-top: 20px;
+}
+
+#solve_calc {
+    float: right;
+}
+
+#resultContainer {
+    background-color: white;
+    position:relative;
+    bottom:0;
+    min-height:200px;
+    margin-top: 50px;
+    width:100%;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+#resultHeading {
+    margin: 0;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    color: lightgray;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+#result{
+    position: absolute;
+    top: 30px;
+    width: 80%;
+    margin-left:10%;
+    text-align: center;
+    color: #6D9BC3;
+    font-width:bold;
+}
+
+.calculationWrapper{
+    padding-bottom:100px;
 }

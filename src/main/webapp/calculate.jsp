@@ -1,4 +1,5 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
+<div id="calcContainer">
     <h1>Calculate binary numbers!</h1>
     <h1>${message}</h1>
     <div class="calculationWrapper">
@@ -25,11 +26,15 @@
                        id="contentField"
                        name="binaryNumber"/>
             </div>
-            <input type="submit" value="calc"/>
-            
+            <input type="submit" value="calculate" class="solve" id="solve_calc"/>
         </form>
-        <h1>Res: ${result}</h1>
     </div>
-    
+    <div id="resultContainer">
+        <h3 id="resultHeading">RESULT</h3>
+        <div id="result">
+            ${result}
+        </div>
+    </div>
+</div>
     
 <%@include file="WEB-INF/jspf/footer.jspf"%>
