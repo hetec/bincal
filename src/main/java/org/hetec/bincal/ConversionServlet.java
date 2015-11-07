@@ -12,19 +12,26 @@ import org.hetc.binaryNumber.BinaryNumber;
 
 @WebServlet(name = "ConversionServlet", urlPatterns = {"/convert"})
 public class ConversionServlet extends HttpServlet {
+    static final String ERROR_MESSAGE_ID = "err";
+    static final String BINARY_NUMBER_PARAM = "bin";
+    static final String DECIMAL_NUMBER_PARAM = "dec";
+    static final String LAST_USED_PARAM = "last";
+    static final String TARGET = "convert.jsp";
+    static final String INVALID_FORMAT_EX = "Please use only valid binary numbers! ";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String binaryNumber = request.getParameter("bin");
-        String decimalNumber = request.getParameter("dec");
-        String lastChangedValue = request.getParameter("last");
+        String binaryNumber = request.getParameter(BINARY_NUMBER_PARAM);
+        String decimalNumber = request.getParameter(DECIMAL_NUMBER_PARAM);
+        String lastChangedValue = request.getParameter(LAST_USED_PARAM);
         String errMessage = "";
         
         errMessage = this.handleConversion(lastChangedValue, binaryNumber, decimalNumber, request);
         
-        request.setAttribute("err", errMessage);
-        RequestDispatcher reqDispatcher = request.getRequestDispatcher("convert.jsp");
+        request.setAttribute(ERROR_MESSAGE_ID, errMessage);
+        RequestDispatcher reqDispatcher = request.getRequestDispatcher(TARGET);
         reqDispatcher.forward(request, response);
     }
     
@@ -42,17 +49,17 @@ public class ConversionServlet extends HttpServlet {
         String message = "";
         
         try {
-            if("bin".equals(lastChangedValue)){
+            if(BINARY_NUMBER_PARAM.equals(lastChangedValue)){
                 decimalNumber = this.convertToDecimal(binaryNumber);
-            }else if("dec".equals(lastChangedValue)){
+            }else if(DECIMAL_NUMBER_PARAM.equals(lastChangedValue)){
                 binaryNumber = this.convertToBinary(decimalNumber);
             }
         } catch (NumberFormatException numberFormatEx) {
-            message = "Your input has an illegal format! Please use only valid numbers.";
+            message = INVALID_FORMAT_EX;
         }
         
-        request.setAttribute("bin", binaryNumber);
-        request.setAttribute("dec", decimalNumber);
+        request.setAttribute(BINARY_NUMBER_PARAM, binaryNumber);
+        request.setAttribute(DECIMAL_NUMBER_PARAM, decimalNumber);
         
         return message;
     }

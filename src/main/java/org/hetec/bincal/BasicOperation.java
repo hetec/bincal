@@ -20,7 +20,7 @@ public enum BasicOperation {
             return bin1.add(bin2);
         }
     },
-    SUBSTRACT("-"){
+    SUBTRACT("-"){
         @Override
         BinaryNumber apply(BinaryNumber bin1, BinaryNumber bin2){
             return bin1.subtract(bin2);
