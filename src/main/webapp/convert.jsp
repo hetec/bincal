@@ -26,4 +26,5 @@
         ${err}
     </div>
 </div>
+<script src="resources/js/submitActions.js" rel="javascript"></script>
 <%@include file="WEB-INF/jspf/footer.jspf"%>
