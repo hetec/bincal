@@ -44,10 +44,8 @@ public class ConversionServlet extends HttpServlet {
         try {
             if("bin".equals(lastChangedValue)){
                 decimalNumber = this.convertToDecimal(binaryNumber);
-                message = decimalNumber;
             }else if("dec".equals(lastChangedValue)){
                 binaryNumber = this.convertToBinary(decimalNumber);
-                message = binaryNumber;
             }
         } catch (NumberFormatException numberFormatEx) {
             message = "Your input has an illegal format! Please use only valid numbers.";

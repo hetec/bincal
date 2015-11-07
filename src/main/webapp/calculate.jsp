@@ -31,7 +31,7 @@
     </div>
     <div id="resultContainer">
         <h3 id="resultHeading">RESULT</h3>
-        <div id="result">
+        <div id="result" class="message">
             ${result}
             ${message}
         </div>

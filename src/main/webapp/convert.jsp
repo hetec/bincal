@@ -22,6 +22,8 @@
         </span>
         <input id="last" type="hidden" name="last">
     </form>
-    <p class="error">${err}</p>
+    <div class="message" id="conversionError">
+        ${err}
+    </div>
 </div>
 <%@include file="WEB-INF/jspf/footer.jspf"%>
