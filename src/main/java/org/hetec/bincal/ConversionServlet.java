@@ -2,6 +2,7 @@ package org.hetec.bincal;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hetc.binaryNumber.BinaryNumber;
+import org.hetc.binaryNumber.BinaryNumberFactory;
 
 @WebServlet(name = "ConversionServlet", urlPatterns = {"/convert"})
 public class ConversionServlet extends HttpServlet {
@@ -18,6 +20,9 @@ public class ConversionServlet extends HttpServlet {
     static final String LAST_USED_PARAM = "last";
     static final String TARGET = "convert.jsp";
     static final String INVALID_FORMAT_EX = "Please use only valid binary numbers! ";
+
+    @Inject
+    private BinaryNumberFactory binaryFactory;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,7 +71,7 @@ public class ConversionServlet extends HttpServlet {
     
     private String convertToDecimal(String binaryNumber){
         if(checkNotNullOrEmpty(binaryNumber)){
-            final BinaryNumber tmp = BinaryNumber.of(binaryNumber);
+            final BinaryNumber tmp = binaryFactory.instanceOf(binaryNumber);
             return tmp.asBigInt().toString();
         }else{
             return "";
@@ -75,7 +80,7 @@ public class ConversionServlet extends HttpServlet {
     
     private String convertToBinary(String decimalNumber){
         if(checkNotNullOrEmpty(decimalNumber)){
-            return BinaryNumber.of(new BigInteger(decimalNumber)).toSignedString();
+            return binaryFactory.instanceOf(new BigInteger(decimalNumber)).toSignedString();//BinaryNumber.of(new BigInteger(decimalNumber)).toSignedString();
         }else{
             return "";
         }

@@ -8,6 +8,7 @@ package org.hetec.bincal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hetc.binaryNumber.BinaryNumber;
+import org.hetc.binaryNumber.BinaryNumberFactory;
 
 /**
  *
@@ -22,6 +24,9 @@ import org.hetc.binaryNumber.BinaryNumber;
  */
 @WebServlet(name = "CalculationServlet", urlPatterns = {"/calculate"})
 public class CalculationServlet extends HttpServlet {
+
+    @Inject
+    private BinaryNumberFactory binaryFactory;
 
     static final String RESULT = "result";
     static final String NUMBERS_PARAM = "binaryNumber";
@@ -75,7 +80,7 @@ public class CalculationServlet extends HttpServlet {
     private List<BinaryNumber> convertParametersToBinaryNumbers(String[] binaryNumbers){
         List<BinaryNumber> bins = new ArrayList<>();
         for(String bin : binaryNumbers){
-            bins.add(BinaryNumber.of(bin));
+            bins.add(binaryFactory.instanceOf(bin));
         }
         return bins;
     }
