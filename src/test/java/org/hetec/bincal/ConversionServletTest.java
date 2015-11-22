@@ -115,7 +115,7 @@ public class ConversionServletTest {
     @Test
     public void test_valid_error_message_for_invalid_binary_number() throws Exception{
         when(mockRequest.getParameter("bin")).thenReturn("01101A");
-        when(mockRequest.getParameter("dec")).thenReturn("");
+        when(mockRequest.getParameter("dec")).thenReturn(decimalNumber);
         when(mockRequest.getParameter("last")).thenReturn("bin");
         when(factory.instanceOf(anyString())).thenThrow(new NumberFormatException());
 
@@ -123,7 +123,21 @@ public class ConversionServletTest {
 
         verify(factory).instanceOf(anyString());
         verify(mockRequest).setAttribute(eq("bin"), eq("01101A"));
-        verify(mockRequest).setAttribute(eq("dec"), eq(""));
+        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
+    }
+
+    @Test
+    public void test_valid_error_message_for_invalid_decimal_number() throws Exception{
+        when(mockRequest.getParameter("bin")).thenReturn(binaryNumber);
+        when(mockRequest.getParameter("dec")).thenReturn("123X");
+        when(mockRequest.getParameter("last")).thenReturn("dec");
+        when(factory.instanceOf(any(BigInteger.class))).thenThrow(new NumberFormatException());
+
+        servlet.doGet(mockRequest, mockResponse);
+
+        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(mockRequest).setAttribute(eq("dec"), eq("123X"));
         verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
     }
 
