@@ -98,4 +98,19 @@ public class ConversionServletTest {
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
+    @Test
+    public void test_set_correct_attributes_for_conversion_without_input() throws Exception{
+        when(mockRequest.getParameter("bin")).thenReturn("");
+        when(mockRequest.getParameter("dec")).thenReturn("");
+        when(mockRequest.getParameter("last")).thenReturn("");
+
+        servlet.doGet(mockRequest, mockResponse);
+
+        verify(factory, never()).instanceOf(anyString());
+        verify(factory, never()).instanceOf(any(BigInteger.class));
+        verify(mockRequest).setAttribute(eq("bin"), eq(""));
+        verify(mockRequest).setAttribute(eq("dec"), eq(""));
+        verify(mockRequest).setAttribute(eq("err"), eq(""));
+    }
+
 }
