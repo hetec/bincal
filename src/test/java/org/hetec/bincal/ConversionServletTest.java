@@ -66,4 +66,18 @@ public class ConversionServletTest {
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
+    @Test
+    public void test_set_correct_attributes_if_converting_a_decimal_to_a_binary_number() throws Exception{
+        when(mockRequest.getParameter("dec")).thenReturn(decimalNumber);
+        when(mockRequest.getParameter("last")).thenReturn("dec");
+        when(factory.instanceOf(any(BigInteger.class))).thenReturn(bin);
+
+        servlet.doGet(mockRequest, mockResponse);
+
+        verify(factory).instanceOf(isA(BigInteger.class));
+        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(mockRequest).setAttribute(eq("err"), eq(""));
+    }
+
 }
