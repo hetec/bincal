@@ -55,6 +55,7 @@ public class ConversionServletTest {
     @Test
     public void test_set_correct_attributes_if_converting_a_binary_to_a_decimal_number() throws Exception{
         when(mockRequest.getParameter("bin")).thenReturn(binaryNumber);
+        when(mockRequest.getParameter("dec")).thenReturn("");
         when(mockRequest.getParameter("last")).thenReturn("bin");
         when(factory.instanceOf(anyString())).thenReturn(bin);
 
@@ -69,12 +70,29 @@ public class ConversionServletTest {
     @Test
     public void test_set_correct_attributes_if_converting_a_decimal_to_a_binary_number() throws Exception{
         when(mockRequest.getParameter("dec")).thenReturn(decimalNumber);
+        when(mockRequest.getParameter("bin")).thenReturn("");
         when(mockRequest.getParameter("last")).thenReturn("dec");
         when(factory.instanceOf(any(BigInteger.class))).thenReturn(bin);
 
         servlet.doGet(mockRequest, mockResponse);
 
         verify(factory).instanceOf(isA(BigInteger.class));
+        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(mockRequest).setAttribute(eq("err"), eq(""));
+    }
+
+    @Test
+    public void test_set_correct_attributes_if_no_value_is_set_for_last_changed() throws Exception{
+        when(mockRequest.getParameter("bin")).thenReturn(binaryNumber);
+        when(mockRequest.getParameter("dec")).thenReturn(decimalNumber);
+        when(mockRequest.getParameter("last")).thenReturn("");
+        when(factory.instanceOf(any(BigInteger.class))).thenReturn(bin);
+
+        servlet.doGet(mockRequest, mockResponse);
+
+        verify(factory, never()).instanceOf(anyString());
+        verify(factory, never()).instanceOf(any(BigInteger.class));
         verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
         verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
         verify(mockRequest).setAttribute(eq("err"), eq(""));
