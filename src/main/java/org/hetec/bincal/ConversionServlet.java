@@ -80,7 +80,7 @@ public class ConversionServlet extends HttpServlet {
     
     private String convertToBinary(String decimalNumber){
         if(checkNotNullOrEmpty(decimalNumber)){
-            return binaryFactory.instanceOf(new BigInteger(decimalNumber)).toSignedString();//BinaryNumber.of(new BigInteger(decimalNumber)).toSignedString();
+            return binaryFactory.instanceOf(new BigInteger(decimalNumber)).toSignedString();
         }else{
             return "";
         }
