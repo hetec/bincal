@@ -11,7 +11,8 @@ import static org.junit.Assert.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ConversionServletTest.class,
-        CalculationServletTest.class
+        CalculationServletTest.class,
+        BasicOperationTest.class
 })
 public class TestSuite {
 
