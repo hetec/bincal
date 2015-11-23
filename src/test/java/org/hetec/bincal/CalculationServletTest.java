@@ -61,7 +61,30 @@ public class CalculationServletTest {
         String res = "1000010000";
         calculationServlet.doGet(request,response);
         verify(request).setAttribute("result", res);
+    }
 
+    @Test
+    public void test_valid_subtraction_returns_a_binary_number() throws Exception{
+        doReturn("-").when(request).getParameter("operation");
+        String res = "-101111110";
+        calculationServlet.doGet(request,response);
+        verify(request).setAttribute("result", res);
+    }
+
+    @Test
+    public void test_valid_multiplication_returns_a_binary_number() throws Exception{
+        doReturn("*").when(request).getParameter("operation");
+        String res = "1000000110111111";
+        calculationServlet.doGet(request,response);
+        verify(request).setAttribute("result", res);
+    }
+
+    @Test
+    public void test_valid_division_returns_a_binary_number() throws Exception{
+        doReturn("/").when(request).getParameter("operation");
+        String res = "0";
+        calculationServlet.doGet(request,response);
+        verify(request).setAttribute("result", res);
     }
 
     @Test
