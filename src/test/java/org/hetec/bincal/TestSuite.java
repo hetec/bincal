@@ -10,7 +10,8 @@ import static org.junit.Assert.*;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ConversionServletTest.class
+        ConversionServletTest.class,
+        CalculationServletTest.class
 })
 public class TestSuite {
 
