@@ -9,6 +9,7 @@
                    name="bin"
                    value="${bin}"
                    placeholder="Your binary number ...">
+            <input type="checkbox" value="true" name="twos"/>
         </span>
         <button id="solve" class="solveButton" class="inputElement" type="submit" name="solve">convert</button>
         <span class="wrapperOutput">
