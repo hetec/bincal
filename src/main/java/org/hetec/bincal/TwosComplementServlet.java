@@ -4,6 +4,7 @@ import org.hetc.binaryNumber.BinaryNumber;
 import org.hetc.binaryNumber.BinaryNumberFactory;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by patrick on 24.11.15.
  */
-@WebServlet(name = "TwosComplementServlet")
+@WebServlet("/twos")
 public class TwosComplementServlet extends HttpServlet {
 
     @Inject
@@ -24,11 +25,18 @@ public class TwosComplementServlet extends HttpServlet {
     private static final String INPUT = "binaryNumber";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        RequestDispatcher dispatcher = null;
         final String number = request.getParameter(INPUT);
+        final String targetPage = request.getParameter("target");
         if(!validateInput(number)){
             request.setAttribute(TOWS, number);
+            dispatcher = request.getRequestDispatcher(targetPage);
+            dispatcher.forward(request,response);
         }else{
             request.setAttribute(TOWS, calcTwosComplement(number));
+            dispatcher = request.getRequestDispatcher(targetPage);
+            dispatcher.forward(request,response);
         }
 
     }
