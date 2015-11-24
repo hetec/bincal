@@ -56,4 +56,16 @@ public class TwosComplementServletTest {
         verify(request).setAttribute("twosComplement", testTwosComplement);
     }
 
+    @Test
+    public void test_returns_input_value_for_unsigned_number() throws Exception{
+        doReturn(testInputUnsigned).when(request).getParameter("binaryNumber");
+
+        servlet.doGet(request,response);
+
+        verify(request, times(1)).getParameter("binaryNumber");
+        verify(factory, never()).instanceOf(anyString());
+        verify(spy, never()).twosComplement();
+        verify(request).setAttribute("twosComplement", testInputUnsigned);
+    }
+
 }
