@@ -1,23 +1,25 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
 <div id="convertContainer">
+
+    <div id="complementButtonBox" class="wrapperInput">
+        <form action="twos" method="get">
+            <c:if test="${fn:startsWith(bin, '-')}">
+                <button type="submit" class="complement">to 2's complement</button>
+                <input type="hidden" value="bin" name="field">
+                <input type="hidden" value="convert.jsp" name="target">
+            </c:if>
+            <c:if test="${showUndo}">
+                <button type="submit" class="complement">to signed number</button>
+                <input type="hidden" value="bin" name="field">
+                <input type="hidden" value="convert.jsp" name="target">
+                <input type="hidden" value="true" name="undo">
+            </c:if>
+        </form>
+
+    </div>
     <form id="input" action="convert" method="get">
+
         <span class="wrapperInput">
-            <div id="complementButtonBox">
-                <c:if test="${fn:startsWith(bin, '-')}">
-                    <a
-                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin"
-                            class="complement">
-                        2's complement
-                    </a>
-                </c:if>
-                <c:if test="${showUndo}">
-                    <a
-                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin&undo=true"
-                            class="complement">
-                        signed number
-                    </a>
-                </c:if>
-            </div>
             <input
                    id = "bin"
                    class="inputElement"
