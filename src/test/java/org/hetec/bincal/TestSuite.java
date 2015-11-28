@@ -12,7 +12,8 @@ import static org.junit.Assert.*;
 @Suite.SuiteClasses({
         ConversionServletTest.class,
         CalculationServletTest.class,
-        BasicOperationTest.class
+        BasicOperationTest.class,
+        TwosComplementServletTest.class
 })
 public class TestSuite {
 

@@ -14,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,6 +38,9 @@ public class ConversionServletTest {
     @Mock
     private BinaryNumberFactory factory;
 
+    @Mock
+    private HttpSession session;
+
     @InjectMocks
     private ConversionServlet servlet = new ConversionServlet();
 
@@ -49,6 +53,7 @@ public class ConversionServletTest {
     public void setUp(){
         bin = BinaryNumber.of(binaryNumber);
         when(mockRequest.getRequestDispatcher("convert.jsp")).thenReturn(dispatcher);
+        doReturn(session).when(mockRequest).getSession(true);
 
     }
 
@@ -62,8 +67,8 @@ public class ConversionServletTest {
         servlet.doGet(mockRequest, mockResponse);
 
         verify(factory).instanceOf(anyString());
-        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
-        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(session).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(session).setAttribute(eq("dec"), eq(decimalNumber));
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
@@ -77,8 +82,8 @@ public class ConversionServletTest {
         servlet.doGet(mockRequest, mockResponse);
 
         verify(factory).instanceOf(isA(BigInteger.class));
-        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
-        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(session).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(session).setAttribute(eq("dec"), eq(decimalNumber));
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
@@ -92,8 +97,8 @@ public class ConversionServletTest {
 
         verify(factory, never()).instanceOf(anyString());
         verify(factory, never()).instanceOf(any(BigInteger.class));
-        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
-        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(session).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(session).setAttribute(eq("dec"), eq(decimalNumber));
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
@@ -107,8 +112,8 @@ public class ConversionServletTest {
 
         verify(factory, never()).instanceOf(anyString());
         verify(factory, never()).instanceOf(any(BigInteger.class));
-        verify(mockRequest).setAttribute(eq("bin"), eq(""));
-        verify(mockRequest).setAttribute(eq("dec"), eq(""));
+        verify(session).setAttribute(eq("bin"), eq(""));
+        verify(session).setAttribute(eq("dec"), eq(""));
         verify(mockRequest).setAttribute(eq("err"), eq(""));
     }
 
@@ -122,8 +127,8 @@ public class ConversionServletTest {
         servlet.doGet(mockRequest, mockResponse);
 
         verify(factory).instanceOf(anyString());
-        verify(mockRequest).setAttribute(eq("bin"), eq("01101A"));
-        verify(mockRequest).setAttribute(eq("dec"), eq(decimalNumber));
+        verify(session).setAttribute(eq("bin"), eq("01101A"));
+        verify(session).setAttribute(eq("dec"), eq(decimalNumber));
         verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
     }
 
@@ -136,8 +141,8 @@ public class ConversionServletTest {
 
         servlet.doGet(mockRequest, mockResponse);
 
-        verify(mockRequest).setAttribute(eq("bin"), eq(binaryNumber));
-        verify(mockRequest).setAttribute(eq("dec"), eq("123X"));
+        verify(session).setAttribute(eq("bin"), eq(binaryNumber));
+        verify(session).setAttribute(eq("dec"), eq("123X"));
         verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
     }
 
