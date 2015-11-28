@@ -5,9 +5,16 @@
             <div id="complementButtonBox">
                 <c:if test="${fn:startsWith(bin, '-')}">
                     <a
-                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin&bin=${bin}"
+                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin"
                             class="complement">
-                        show as 2's complement
+                        2's complement
+                    </a>
+                </c:if>
+                <c:if test="${showUndo}">
+                    <a
+                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin&undo=true"
+                            class="complement">
+                        signed number
                     </a>
                 </c:if>
             </div>
