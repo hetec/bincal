@@ -188,3 +188,20 @@ h1 {
 .calculationWrapper{
     padding-bottom:100px;
 }
+
+#complementButtonBox{
+    background-color: transparent;
+    height: 20px;
+}
+
+.complement{
+    color: #6D9BC3;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+.complement:hover{
+    color: white;
+}

@@ -2,6 +2,15 @@
 <div id="convertContainer">
     <form id="input" action="convert" method="get">
         <span class="wrapperInput">
+            <div id="complementButtonBox">
+                <c:if test="${fn:startsWith(bin, '-')}">
+                    <a
+                            href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin&bin=${bin}"
+                            class="complement">
+                        show as 2's complement
+                    </a>
+                </c:if>
+            </div>
             <input
                    id = "bin"
                    class="inputElement"
@@ -9,9 +18,6 @@
                    name="bin"
                    value="${bin}"
                    placeholder="Your binary number ...">
-            <c:if test="${fn:startsWith(bin, '-')}">
-                <a href="http://localhost:8080/bincal/twos?target=convert.jsp&field=bin&bin=${bin}&dec=${dec}">as 2's complement</a>
-            </c:if>
         </span>
         <button id="solve" class="solveButton" class="inputElement" type="submit" name="solve">convert</button>
         <span class="wrapperOutput">
