@@ -28,17 +28,25 @@ public class TwosComplementServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
+        final String undo = request.getParameter("undo");
         final String field = request.getParameter(FIELD);
         final String number = (String)session.getAttribute(field);
         final String targetPage = request.getParameter(TARGET);
         RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
-        if(!validateInput(number)){
+        if("true".equals(undo)){
             request.setAttribute(field, number);
             dispatcher.forward(request,response);
         }else{
-            request.setAttribute(field, calcTwosComplement(number));
-            dispatcher.forward(request,response);
+            if(!validateInput(number)){
+                request.setAttribute(field, number);
+                dispatcher.forward(request,response);
+            }else{
+                request.setAttribute(field, calcTwosComplement(number));
+                request.setAttribute("showUndo", true);
+                dispatcher.forward(request,response);
+            }
         }
+
 
     }
 

@@ -70,6 +70,7 @@ public class TwosComplementServletTest {
         verify(factory, times(1)).instanceOf(anyString());
         verify(spy).twosComplement();
         verify(request).setAttribute("bin", testTwosComplement);
+        verify(request).setAttribute("showUndo", true);
     }
 
     @Test
@@ -85,6 +86,24 @@ public class TwosComplementServletTest {
         verify(spy, never()).twosComplement();
         verify(request).setAttribute("bin", testInputUnsigned);
     }
+
+
+    @Test
+    public void test_returns_signed_input_on_parameter_undo() throws Exception{
+        doReturn("bin").when(request).getParameter("field");
+        doReturn(testInputSigned).when(session).getAttribute("bin");
+        doReturn("true").when(request).getParameter("undo");
+
+        servlet.doGet(request,response);
+
+        verify(request, times(1)).getParameter("undo");
+        verify(session, times(1)).getAttribute("bin");
+        verify(request, times(1)).getParameter("field");
+        verify(factory, never()).instanceOf(anyString());
+        verify(spy, never()).twosComplement();
+        verify(request).setAttribute("bin", testInputSigned);
+    }
+
 
     @Test
     public void test_forward_for_valid_input() throws Exception{
