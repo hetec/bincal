@@ -130,4 +130,16 @@ public class TwosComplementServletTest {
         verify(dispatcher).forward(request,response);
     }
 
+    @Test
+    public void test_returns_empty_numbers_for_not_existing_session_on_undo() throws Exception{
+        doReturn(null).when(request).getSession(false);
+        doReturn("test.jsp").when(request).getParameter("target");
+
+        servlet.doGet(request,response);
+
+        verify(request).getSession(false);
+        verify(request).getRequestDispatcher("test.jsp");
+        verify(dispatcher).forward(request,response);
+    }
+
 }

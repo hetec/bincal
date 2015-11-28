@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Created by patrick on 24.11.15.
@@ -27,25 +28,30 @@ public class TwosComplementServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
-        final String undo = request.getParameter("undo");
-        final String field = request.getParameter(FIELD);
-        final String number = (String)session.getAttribute(field);
         final String targetPage = request.getParameter(TARGET);
         RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
-        if("true".equals(undo)){
-            request.setAttribute(field, number);
+        HttpSession session = request.getSession(false);
+        if(Objects.isNull(session)){
             dispatcher.forward(request,response);
         }else{
-            if(!validateInput(number)){
+            final String undo = request.getParameter("undo");
+            final String field = request.getParameter(FIELD);
+            final String number = (String)session.getAttribute(field);
+            if("true".equals(undo)){
                 request.setAttribute(field, number);
                 dispatcher.forward(request,response);
             }else{
-                request.setAttribute(field, calcTwosComplement(number));
-                request.setAttribute("showUndo", true);
-                dispatcher.forward(request,response);
+                if(!validateInput(number)){
+                    request.setAttribute(field, number);
+                    dispatcher.forward(request,response);
+                }else{
+                    request.setAttribute(field, calcTwosComplement(number));
+                    request.setAttribute("showUndo", true);
+                    dispatcher.forward(request,response);
+                }
             }
         }
+
 
 
     }
