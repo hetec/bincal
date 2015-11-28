@@ -21,21 +21,25 @@ public class TwosComplementServlet extends HttpServlet {
     @Inject
     private BinaryNumberFactory factory;
 
-    private static final String TOWS = "twosComplement";
-    private static final String INPUT = "binaryNumber";
+    private static final String FIELD = "field";
+    private static final String TARGET = "target";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         RequestDispatcher dispatcher = null;
-        final String number = request.getParameter(INPUT);
-        final String targetPage = request.getParameter("target");
+        final String field = request.getParameter(FIELD);
+        final String number = request.getParameter(field);
+        final String dec = request.getParameter("dec");
+        final String targetPage = request.getParameter(TARGET);
         if(!validateInput(number)){
-            request.setAttribute(TOWS, number);
+            request.setAttribute(field, number);
+            request.setAttribute("dec", dec);
             dispatcher = request.getRequestDispatcher(targetPage);
             dispatcher.forward(request,response);
         }else{
-            request.setAttribute(TOWS, calcTwosComplement(number));
+            request.setAttribute(field, calcTwosComplement(number));
             dispatcher = request.getRequestDispatcher(targetPage);
+            request.setAttribute("dec", dec);
             dispatcher.forward(request,response);
         }
 

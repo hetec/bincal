@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.hetc.binaryNumber.BinaryNumber;
 import org.hetc.binaryNumber.BinaryNumberFactory;
 
@@ -31,9 +33,10 @@ public class ConversionServlet extends HttpServlet {
         String binaryNumber = request.getParameter(BINARY_NUMBER_PARAM);
         String decimalNumber = request.getParameter(DECIMAL_NUMBER_PARAM);
         String lastChangedValue = request.getParameter(LAST_USED_PARAM);
+        final HttpSession session = request.getSession(true);
         String errMessage = "";
         
-        errMessage = this.handleConversion(lastChangedValue, binaryNumber, decimalNumber, request);
+        errMessage = this.handleConversion(lastChangedValue, binaryNumber, decimalNumber, session);
         
         request.setAttribute(ERROR_MESSAGE_ID, errMessage);
         RequestDispatcher reqDispatcher = request.getRequestDispatcher(TARGET);
@@ -50,7 +53,7 @@ public class ConversionServlet extends HttpServlet {
     private String handleConversion(String lastChangedValue,
                                   String binaryNumber,
                                   String decimalNumber,
-                                  HttpServletRequest request){
+                                  HttpSession session){
         String message = "";
         
         try {
@@ -63,8 +66,8 @@ public class ConversionServlet extends HttpServlet {
             message = INVALID_FORMAT_EX;
         }
         
-        request.setAttribute(BINARY_NUMBER_PARAM, binaryNumber);
-        request.setAttribute(DECIMAL_NUMBER_PARAM, decimalNumber);
+        session.setAttribute(BINARY_NUMBER_PARAM, binaryNumber);
+        session.setAttribute(DECIMAL_NUMBER_PARAM, decimalNumber);
         
         return message;
     }
