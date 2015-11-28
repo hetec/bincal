@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
 import static org.junit.Assert.*;
@@ -40,22 +41,31 @@ public class TwosComplementServletTest {
     @Mock
     private RequestDispatcher dispatcher;
 
+    @Mock
+    private HttpSession session;
+
+
     private final String testInputSigned = "-111000111";
     private final String testInputUnsigned = "111000111";
     private final BinaryNumber spy = spy(BinaryNumber.of("111000111"));
     private final String testTwosComplement = BinaryNumber.of("111000111").twosComplement().toString();
 
+    @Before
+    public void setup(){
+        doReturn(session).when(request).getSession(false);
+        doReturn(dispatcher).when(request).getRequestDispatcher(anyString());
+    }
+
 
     @Test
     public void test_returns_tows_complement_representation() throws Exception{
         doReturn("bin").when(request).getParameter("field");
-        doReturn(testInputSigned).when(request).getParameter("bin");
+        doReturn(testInputSigned).when(session).getAttribute("bin");
         doReturn(spy).when(factory).instanceOf(testInputUnsigned);
-        doReturn(dispatcher).when(request).getRequestDispatcher(anyString());
 
         servlet.doGet(request,response);
 
-        verify(request, times(1)).getParameter("bin");
+        verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
         verify(factory, times(1)).instanceOf(anyString());
         verify(spy).twosComplement();
@@ -65,12 +75,11 @@ public class TwosComplementServletTest {
     @Test
     public void test_returns_input_value_for_unsigned_number() throws Exception{
         doReturn("bin").when(request).getParameter("field");
-        doReturn(testInputUnsigned).when(request).getParameter("bin");
-        doReturn(dispatcher).when(request).getRequestDispatcher(anyString());
+        doReturn(testInputUnsigned).when(session).getAttribute("bin");
 
         servlet.doGet(request,response);
 
-        verify(request, times(1)).getParameter("bin");
+        verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
         verify(factory, never()).instanceOf(anyString());
         verify(spy, never()).twosComplement();
@@ -80,10 +89,9 @@ public class TwosComplementServletTest {
     @Test
     public void test_forward_for_valid_input() throws Exception{
         doReturn("bin").when(request).getParameter("field");
-        doReturn(testInputSigned).when(request).getParameter("bin");
+        doReturn(testInputSigned).when(session).getAttribute("bin");
         doReturn("test.jsp").when(request).getParameter("target");
         doReturn(spy).when(factory).instanceOf(testInputUnsigned);
-        doReturn(dispatcher).when(request).getRequestDispatcher("test.jsp");
 
         servlet.doGet(request,response);
 
@@ -94,9 +102,8 @@ public class TwosComplementServletTest {
     @Test
     public void test_forward_for_invalid_input() throws Exception{
         doReturn("bin").when(request).getParameter("field");
-        doReturn(testInputUnsigned).when(request).getParameter("bin");
+        doReturn(testInputUnsigned).when(session).getAttribute("bin");
         doReturn("test.jsp").when(request).getParameter("target");
-        doReturn(dispatcher).when(request).getRequestDispatcher("test.jsp");
 
         servlet.doGet(request,response);
 
