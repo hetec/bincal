@@ -63,7 +63,7 @@ public class TwosComplementServletTest {
         doReturn(testInputSigned).when(session).getAttribute("bin");
         doReturn(spy).when(factory).instanceOf(testInputUnsigned);
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
@@ -78,7 +78,7 @@ public class TwosComplementServletTest {
         doReturn("bin").when(request).getParameter("field");
         doReturn(testInputUnsigned).when(session).getAttribute("bin");
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
@@ -94,7 +94,7 @@ public class TwosComplementServletTest {
         doReturn(testInputSigned).when(session).getAttribute("bin");
         doReturn("true").when(request).getParameter("undo");
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(request, times(1)).getParameter("undo");
         verify(session, times(1)).getAttribute("bin");
@@ -112,7 +112,7 @@ public class TwosComplementServletTest {
         doReturn("test.jsp").when(request).getParameter("target");
         doReturn(spy).when(factory).instanceOf(testInputUnsigned);
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(request).getRequestDispatcher("test.jsp");
         verify(dispatcher).forward(request,response);
@@ -124,7 +124,7 @@ public class TwosComplementServletTest {
         doReturn(testInputUnsigned).when(session).getAttribute("bin");
         doReturn("test.jsp").when(request).getParameter("target");
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(request).getRequestDispatcher("test.jsp");
         verify(dispatcher).forward(request,response);
@@ -135,7 +135,7 @@ public class TwosComplementServletTest {
         doReturn(null).when(request).getSession(false);
         doReturn("test.jsp").when(request).getParameter("target");
 
-        servlet.doGet(request,response);
+        servlet.doPost(request,response);
 
         verify(request).getSession(false);
         verify(request).getRequestDispatcher("test.jsp");

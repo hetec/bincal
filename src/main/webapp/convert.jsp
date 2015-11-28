@@ -2,7 +2,7 @@
 <div id="convertContainer">
 
     <div id="complementButtonBox" class="wrapperInput">
-        <form action="twos" method="get">
+        <form action="twos" method="post">
             <c:if test="${fn:startsWith(bin, '-')}">
                 <button type="submit" class="complement">to 2's complement</button>
                 <input type="hidden" value="bin" name="field">
@@ -17,7 +17,7 @@
         </form>
 
     </div>
-    <form id="input" action="convert" method="get">
+    <form id="input" action="convert" method="post">
 
         <span class="wrapperInput">
             <input

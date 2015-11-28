@@ -64,7 +64,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("last")).thenReturn("bin");
         when(factory.instanceOf(anyString())).thenReturn(bin);
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(factory).instanceOf(anyString());
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
@@ -79,7 +79,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("last")).thenReturn("dec");
         when(factory.instanceOf(any(BigInteger.class))).thenReturn(bin);
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(factory).instanceOf(isA(BigInteger.class));
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
@@ -93,7 +93,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("dec")).thenReturn(decimalNumber);
         when(mockRequest.getParameter("last")).thenReturn("");
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(factory, never()).instanceOf(anyString());
         verify(factory, never()).instanceOf(any(BigInteger.class));
@@ -108,7 +108,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("dec")).thenReturn("");
         when(mockRequest.getParameter("last")).thenReturn("");
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(factory, never()).instanceOf(anyString());
         verify(factory, never()).instanceOf(any(BigInteger.class));
@@ -124,7 +124,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("last")).thenReturn("bin");
         when(factory.instanceOf(anyString())).thenThrow(new NumberFormatException());
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(factory).instanceOf(anyString());
         verify(session).setAttribute(eq("bin"), eq("01101A"));
@@ -139,7 +139,7 @@ public class ConversionServletTest {
         when(mockRequest.getParameter("last")).thenReturn("dec");
         when(factory.instanceOf(any(BigInteger.class))).thenThrow(new NumberFormatException());
 
-        servlet.doGet(mockRequest, mockResponse);
+        servlet.doPost(mockRequest, mockResponse);
 
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
         verify(session).setAttribute(eq("dec"), eq("123X"));

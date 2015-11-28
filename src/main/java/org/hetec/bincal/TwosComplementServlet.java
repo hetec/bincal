@@ -26,7 +26,7 @@ public class TwosComplementServlet extends HttpServlet {
     private static final String FIELD = "field";
     private static final String TARGET = "target";
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         final String targetPage = request.getParameter(TARGET);
         RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
