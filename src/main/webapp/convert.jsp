@@ -1,6 +1,11 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
-<div id="convertContainer">
+<c:set scope="session" var="sourcePage" value="convert.jsp"/>
+<div class="notification">
+    ${missingCookies}
+</div>
 
+</div>
+<div id="convertContainer">
     <div id="complementButtonBox" class="wrapperInput">
         <form action="twos" method="post">
             <c:if test="${fn:startsWith(bin, '-')}">

@@ -1,4 +1,7 @@
 <%@include file="WEB-INF/jspf/header.jspf"%>
+<div class="notification">
+    ${missingCookies}
+</div>
 <div id="calcContainer">
     <div class="calculationWrapper">
         <form id="calculationForm" action="calculate" method="get">

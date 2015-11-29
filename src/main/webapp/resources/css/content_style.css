@@ -212,3 +212,12 @@ h1 {
     margin-left:10px;
     margin-bottom: 5px;
 }
+
+.notification{
+    color: #6D9BC3;
+    position: fixed;
+    top: 40px;
+    right: 0;
+    padding: 5px;
+    text-align: center;
+}
