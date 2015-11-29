@@ -4,7 +4,7 @@
 </div>
 <div id="calcContainer">
     <div class="calculationWrapper">
-        <form id="calculationForm" action="calculate" method="get">
+        <form id="calculationForm" action="calculate" method="post">
             <div class="calculationFieldWrapper">
                 <input type="text"
                    placeholder="First binary number"

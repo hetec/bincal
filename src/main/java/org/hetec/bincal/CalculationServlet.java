@@ -40,7 +40,7 @@ public class CalculationServlet extends HttpServlet {
     static final String NO_VALID_OP_EX = "No valid operation! Please use '+','-','*' or '/'! ";
     static final String INVALID_FORMAT_EX = "Please use only valid binary numbers! ";
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");

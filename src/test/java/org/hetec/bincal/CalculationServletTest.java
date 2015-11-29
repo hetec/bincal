@@ -59,7 +59,7 @@ public class CalculationServletTest {
     public void test_valid_addition_returns_a_binary_number() throws Exception{
         doReturn("+").when(request).getParameter("operation");
         String res = "1000010000";
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("result", res);
     }
 
@@ -67,7 +67,7 @@ public class CalculationServletTest {
     public void test_valid_subtraction_returns_a_binary_number() throws Exception{
         doReturn("-").when(request).getParameter("operation");
         String res = "-101111110";
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("result", res);
     }
 
@@ -75,7 +75,7 @@ public class CalculationServletTest {
     public void test_valid_multiplication_returns_a_binary_number() throws Exception{
         doReturn("*").when(request).getParameter("operation");
         String res = "1000000110111111";
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("result", res);
     }
 
@@ -83,13 +83,13 @@ public class CalculationServletTest {
     public void test_valid_division_returns_a_binary_number() throws Exception{
         doReturn("/").when(request).getParameter("operation");
         String res = "0";
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("result", res);
     }
 
     @Test
     public void test_return_parameter_values_to_restore_input_fields() throws Exception{
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("number1", "1001001");
         verify(request).setAttribute("number2", "111000111");
     }
@@ -98,7 +98,7 @@ public class CalculationServletTest {
     public void test_throws_exception_for_to_less_args() throws Exception{
         doReturn(new String[]{"111", ""}).when(request).getParameterValues("binaryNumber");
         doReturn("+").when(request).getParameter("operation");
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("message","Two binary numbers are necessary to process a valid calculation! ");
     }
 
@@ -106,14 +106,14 @@ public class CalculationServletTest {
     public void test_throws_exception_for_invalid_args() throws Exception{
         doThrow(NumberFormatException.class).when(factory).instanceOf(anyString());
         doReturn("+").when(request).getParameter("operation");
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("message","Please use only valid binary numbers! ");
     }
 
     @Test
     public void test_throws_exception_for_invalid_operation() throws Exception{
         doReturn("x").when(request).getParameter("operation");
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("message","No valid operation! Please use '+','-','*' or '/'! ");
     }
 
@@ -123,7 +123,7 @@ public class CalculationServletTest {
         doReturn(BinaryNumber.of("0")).when(factory).instanceOf("0");
         doReturn(new String[]{"111", "0"}).when(request).getParameterValues("binaryNumber");
         doReturn("/").when(request).getParameter("operation");
-        calculationServlet.doGet(request,response);
+        calculationServlet.doPost(request,response);
         verify(request).setAttribute("message", "Sorry, division by zero is not allowed!");
     }
 
