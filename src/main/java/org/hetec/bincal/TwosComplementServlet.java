@@ -5,6 +5,7 @@ import org.hetc.binaryNumber.BinaryNumberFactory;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,9 +52,19 @@ public class TwosComplementServlet extends HttpServlet {
                 }
             }
         }
+    }
 
-
-
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final HttpSession session = req.getSession(false);
+        String sourcePage;
+        if(Objects.nonNull(session)){
+           sourcePage = (String)session.getAttribute("sourcePage");
+        }else {
+            sourcePage = "convert.jsp";
+        }
+        resp.setHeader("location", sourcePage);
+        resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
     }
 
     private boolean validateInput(String number){

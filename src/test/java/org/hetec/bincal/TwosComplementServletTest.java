@@ -131,6 +131,30 @@ public class TwosComplementServletTest {
     }
 
     @Test
+    public void test_redirect_to_initial_page_on_get_request() throws Exception{
+        doReturn("convert.jsp").when(session).getAttribute("sourcePage");
+
+        servlet.doGet(request,response);
+
+        verify(request).getSession(false);
+        verify(session).getAttribute("sourcePage");
+        verify(response).setHeader("location", "convert.jsp");
+        verify(response).setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+    }
+
+    @Test
+    public void test_redirect_to_initial_page_on_get_request_if_session_is_null() throws Exception{
+        doReturn(null).when(request).getSession(false);
+
+        servlet.doGet(request,response);
+
+        verify(request).getSession(false);
+        verify(session, never()).getAttribute("sourcePage");
+        verify(response).setHeader("location", "convert.jsp");
+        verify(response).setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+    }
+
+    @Test
     public void test_returns_empty_numbers_for_not_existing_session_on_undo() throws Exception{
         doReturn(null).when(request).getSession(false);
         doReturn("test.jsp").when(request).getParameter("target");
