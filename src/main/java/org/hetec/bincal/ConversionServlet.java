@@ -49,6 +49,12 @@ public class ConversionServlet extends HttpServlet {
                 return true;
         return false;
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request,response);
+    }
     
     private String handleConversion(String lastChangedValue,
                                   String binaryNumber,
