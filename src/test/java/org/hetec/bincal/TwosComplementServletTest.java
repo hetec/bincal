@@ -47,7 +47,6 @@ public class TwosComplementServletTest {
 
     private final String testInputSigned = "-111000111";
     private final String testInputUnsigned = "111000111";
-    private final BinaryNumber spy = spy(BinaryNumber.of("111000111"));
     private final String testTwosComplement = BinaryNumber.of("111000111").twosComplement().toString();
 
     @Before
@@ -61,14 +60,13 @@ public class TwosComplementServletTest {
     public void test_returns_tows_complement_representation() throws Exception{
         doReturn("bin").when(request).getParameter("field");
         doReturn(testInputSigned).when(session).getAttribute("bin");
-        doReturn(spy).when(factory).instanceOf(testInputUnsigned);
+        doReturn(BinaryNumber.of("111000111")).when(factory).instanceOf(testInputUnsigned);
 
         servlet.doPost(request,response);
 
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
         verify(factory, times(1)).instanceOf(anyString());
-        verify(spy).twosComplement();
         verify(request).setAttribute("bin", testTwosComplement);
         verify(request).setAttribute("showUndo", true);
     }
@@ -83,7 +81,6 @@ public class TwosComplementServletTest {
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
         verify(factory, never()).instanceOf(anyString());
-        verify(spy, never()).twosComplement();
         verify(request).setAttribute("bin", testInputUnsigned);
     }
 
@@ -100,7 +97,6 @@ public class TwosComplementServletTest {
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
         verify(factory, never()).instanceOf(anyString());
-        verify(spy, never()).twosComplement();
         verify(request).setAttribute("bin", testInputSigned);
     }
 
@@ -110,7 +106,7 @@ public class TwosComplementServletTest {
         doReturn("bin").when(request).getParameter("field");
         doReturn(testInputSigned).when(session).getAttribute("bin");
         doReturn("test.jsp").when(request).getParameter("target");
-        doReturn(spy).when(factory).instanceOf(testInputUnsigned);
+        doReturn(BinaryNumber.of("111000111")).when(factory).instanceOf(testInputUnsigned);
 
         servlet.doPost(request,response);
 
