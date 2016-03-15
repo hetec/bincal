@@ -9,14 +9,16 @@
     <div id="complementButtonBox" class="wrapperInput">
         <form action="twos" method="post">
             <c:if test="${fn:startsWith(bin, '-')}">
-                <button type="submit" class="complement">to 2's complement</button>
-                <input type="hidden" value="bin" name="field">
-                <input type="hidden" value="convert.jsp" name="target">
+                <c:if test="${empty err}">
+                    <button type="submit" class="complement">to 2's complement</button>
+                    <input type="hidden" value="bin" name="field">
+                    <input type="hidden" value="index.jsp" name="target">
+                </c:if>
             </c:if>
             <c:if test="${showUndo}">
                 <button type="submit" class="complement">to signed number</button>
                 <input type="hidden" value="bin" name="field">
-                <input type="hidden" value="convert.jsp" name="target">
+                <input type="hidden" value="index.jsp" name="target">
                 <input type="hidden" value="true" name="undo">
             </c:if>
         </form>

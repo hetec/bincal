@@ -61,7 +61,7 @@ public class TwosComplementServlet extends HttpServlet {
         if(Objects.nonNull(session)){
            sourcePage = (String)session.getAttribute("sourcePage");
         }else {
-            sourcePage = "convert.jsp";
+            sourcePage = "index.jsp";
         }
         resp.setHeader("location", sourcePage);
         resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);

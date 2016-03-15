@@ -128,13 +128,13 @@ public class TwosComplementServletTest {
 
     @Test
     public void test_redirect_to_initial_page_on_get_request() throws Exception{
-        doReturn("convert.jsp").when(session).getAttribute("sourcePage");
+        doReturn("index.jsp").when(session).getAttribute("sourcePage");
 
         servlet.doGet(request,response);
 
         verify(request).getSession(false);
         verify(session).getAttribute("sourcePage");
-        verify(response).setHeader("location", "convert.jsp");
+        verify(response).setHeader("location", "index.jsp");
         verify(response).setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
     }
 
@@ -146,7 +146,7 @@ public class TwosComplementServletTest {
 
         verify(request).getSession(false);
         verify(session, never()).getAttribute("sourcePage");
-        verify(response).setHeader("location", "convert.jsp");
+        verify(response).setHeader("location", "index.jsp");
         verify(response).setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
     }
 

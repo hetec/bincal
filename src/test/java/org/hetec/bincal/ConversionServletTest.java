@@ -52,7 +52,7 @@ public class ConversionServletTest {
     @Before
     public void setUp(){
         bin = BinaryNumber.of(binaryNumber);
-        when(mockRequest.getRequestDispatcher("convert.jsp")).thenReturn(dispatcher);
+        when(mockRequest.getRequestDispatcher("index.jsp")).thenReturn(dispatcher);
         doReturn(session).when(mockRequest).getSession(true);
 
     }

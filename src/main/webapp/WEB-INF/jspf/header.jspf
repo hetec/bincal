@@ -15,7 +15,7 @@
         <div class="headerContainer">
             <div class="logo">bincal.</div>
             <nav>
-                <a href="convert.jsp">
+                <a href="index.jsp">
                     <div id="converterLink">
                         converter
                     </div>

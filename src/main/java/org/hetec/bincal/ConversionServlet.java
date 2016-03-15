@@ -20,7 +20,7 @@ public class ConversionServlet extends HttpServlet {
     static final String BINARY_NUMBER_PARAM = "bin";
     static final String DECIMAL_NUMBER_PARAM = "dec";
     static final String LAST_USED_PARAM = "last";
-    static final String TARGET = "convert.jsp";
+    static final String TARGET = "index.jsp";
     static final String INVALID_FORMAT_EX = "Please use only valid binary numbers! ";
 
     @Inject

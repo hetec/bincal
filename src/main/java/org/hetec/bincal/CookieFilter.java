@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Created by patrick on 29.11.15.
  */
-@WebFilter(filterName = "CookieFilter", urlPatterns = {"/convert.jsp", "/calculate.jsp"})
+@WebFilter(filterName = "CookieFilter", urlPatterns = {"/index.jsp", "/calculate.jsp"})
 public class CookieFilter implements Filter {
     public void destroy() {
     }

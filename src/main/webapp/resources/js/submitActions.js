@@ -33,8 +33,8 @@ button.onclick = function (){
 };
 
 function handleRemovedInput(){
-    var binEmpty = binInput.value === "";
-    var decEmpty = decInput.value === "";
+    var binEmpty = (document.querySelector('#bin')).value === "";
+    var decEmpty = (document.querySelector('#dec')).value === "";
     if(binEmpty || decEmpty){
         if(binEmpty){
             last.value = "dec";
