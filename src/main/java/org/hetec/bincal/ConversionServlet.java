@@ -38,6 +38,7 @@ public class ConversionServlet extends HttpServlet {
         
         errMessage = this.handleConversion(lastChangedValue, binaryNumber, decimalNumber, session);
         
+        session.setAttribute(ERROR_MESSAGE_ID, errMessage);
         request.setAttribute(ERROR_MESSAGE_ID, errMessage);
         RequestDispatcher reqDispatcher = request.getRequestDispatcher(TARGET);
         reqDispatcher.forward(request, response);
