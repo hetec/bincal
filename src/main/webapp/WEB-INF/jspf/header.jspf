@@ -9,7 +9,9 @@
         <link href="resources/css/content_style.css" rel="stylesheet">
         <link href="resources/css/header_style.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Sansita+One' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway:400,900' rel='stylesheet' type='text/css'>    </head>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,900' rel='stylesheet' type='text/css'>
+        <script src="resources/js/checkCookies.js" rel="javascript"></script>
+    </head>
     <body>
     <header>
         <div class="headerContainer">

@@ -11,19 +11,18 @@
         <form action="twos" method="post">
             <c:if test="${fn:startsWith(bin, '-')}">
                 <c:if test="${empty conversionErrorMessage}">
-                    <button type="submit" class="complement">to 2's complement</button>
+                    <button type="submit" id="complementButton" class="complement">to 2's complement</button>
                     <input type="hidden" value="bin" name="field">
                     <input type="hidden" value="index.jsp" name="target">
                 </c:if>
             </c:if>
             <c:if test="${showUndo}">
-                <button type="submit" class="complement">to signed number</button>
+                <button type="submit" id="complementButton" class="complement">to signed number</button>
                 <input type="hidden" value="bin" name="field">
                 <input type="hidden" value="index.jsp" name="target">
                 <input type="hidden" value="true" name="undo">
             </c:if>
         </form>
-
     </div>
     <form id="input" action="convert" method="post">
 
@@ -53,4 +52,6 @@
     </div>
 </div>
 <script src="resources/js/submitActions.js" rel="javascript"></script>
+<script src="resources/js/checkCookies.js" rel="javascript"></script>
+
 <%@include file="WEB-INF/jspf/footer.jspf"%>
