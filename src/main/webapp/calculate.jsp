@@ -36,7 +36,7 @@
         <h3 id="resultHeading">RESULT</h3>
         <div id="result" class="message">
             ${result}
-            ${message}
+            ${calculationErrrorMsg}
         </div>
     </div>
 </div>

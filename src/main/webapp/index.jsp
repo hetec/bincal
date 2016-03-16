@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="WEB-INF/jspf/header.jspf"%>
 <c:set scope="session" var="sourcePage" value="convert.jsp"/>
 <div class="notification">
@@ -9,7 +10,7 @@
     <div id="complementButtonBox" class="wrapperInput">
         <form action="twos" method="post">
             <c:if test="${fn:startsWith(bin, '-')}">
-                <c:if test="${empty err}">
+                <c:if test="${empty conversionErrorMessage}">
                     <button type="submit" class="complement">to 2's complement</button>
                     <input type="hidden" value="bin" name="field">
                     <input type="hidden" value="index.jsp" name="target">
@@ -48,7 +49,7 @@
         <input id="last" type="hidden" name="last">
     </form>
     <div class="message" id="conversionError">
-        ${err}
+        ${conversionErrorMessage}
     </div>
 </div>
 <script src="resources/js/submitActions.js" rel="javascript"></script>

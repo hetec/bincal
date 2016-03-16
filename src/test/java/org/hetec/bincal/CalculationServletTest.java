@@ -99,7 +99,7 @@ public class CalculationServletTest {
         doReturn(new String[]{"111", ""}).when(request).getParameterValues("binaryNumber");
         doReturn("+").when(request).getParameter("operation");
         calculationServlet.doPost(request,response);
-        verify(request).setAttribute("message","Two binary numbers are necessary to process a valid calculation! ");
+        verify(request).setAttribute("calculationErrorMsg","Two binary numbers are necessary to process a valid calculation! ");
     }
 
     @Test
@@ -107,14 +107,14 @@ public class CalculationServletTest {
         doThrow(NumberFormatException.class).when(factory).instanceOf(anyString());
         doReturn("+").when(request).getParameter("operation");
         calculationServlet.doPost(request,response);
-        verify(request).setAttribute("message","Please use only valid binary numbers! ");
+        verify(request).setAttribute("calculationErrorMsg","Please use only valid binary numbers! ");
     }
 
     @Test
     public void test_throws_exception_for_invalid_operation() throws Exception{
         doReturn("x").when(request).getParameter("operation");
         calculationServlet.doPost(request,response);
-        verify(request).setAttribute("message","No valid operation! Please use '+','-','*' or '/'! ");
+        verify(request).setAttribute("calculationErrorMsg","No valid operation! Please use '+','-','*' or '/'! ");
     }
 
     @Test
@@ -124,7 +124,7 @@ public class CalculationServletTest {
         doReturn(new String[]{"111", "0"}).when(request).getParameterValues("binaryNumber");
         doReturn("/").when(request).getParameter("operation");
         calculationServlet.doPost(request,response);
-        verify(request).setAttribute("message", "Sorry, division by zero is not allowed!");
+        verify(request).setAttribute("calculationErrorMsg", "Sorry, division by zero is not allowed!");
     }
 
 }

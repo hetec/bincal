@@ -66,7 +66,7 @@ public class TwosComplementServletTest {
 
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
-        verify(factory, times(1)).instanceOf(anyString());
+        verify(factory, times(2)).instanceOf(anyString());
         verify(request).setAttribute("bin", testTwosComplement);
         verify(request).setAttribute("showUndo", true);
     }
@@ -80,7 +80,7 @@ public class TwosComplementServletTest {
 
         verify(session, times(1)).getAttribute("bin");
         verify(request, times(1)).getParameter("field");
-        verify(factory, never()).instanceOf(anyString());
+        verify(factory, times(1)).instanceOf(anyString());
         verify(request).setAttribute("bin", testInputUnsigned);
     }
 

@@ -69,7 +69,7 @@ public class ConversionServletTest {
         verify(factory).instanceOf(anyString());
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
         verify(session).setAttribute(eq("dec"), eq(decimalNumber));
-        verify(mockRequest).setAttribute(eq("err"), eq(""));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq(""));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ConversionServletTest {
         verify(factory).instanceOf(isA(BigInteger.class));
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
         verify(session).setAttribute(eq("dec"), eq(decimalNumber));
-        verify(mockRequest).setAttribute(eq("err"), eq(""));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq(""));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class ConversionServletTest {
         verify(factory, never()).instanceOf(any(BigInteger.class));
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
         verify(session).setAttribute(eq("dec"), eq(decimalNumber));
-        verify(mockRequest).setAttribute(eq("err"), eq(""));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq(""));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ConversionServletTest {
         verify(factory, never()).instanceOf(any(BigInteger.class));
         verify(session).setAttribute(eq("bin"), eq(""));
         verify(session).setAttribute(eq("dec"), eq(""));
-        verify(mockRequest).setAttribute(eq("err"), eq(""));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq(""));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ConversionServletTest {
         verify(factory).instanceOf(anyString());
         verify(session).setAttribute(eq("bin"), eq("01101A"));
         verify(session).setAttribute(eq("dec"), eq(decimalNumber));
-        verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq("Please use only valid binary numbers! "));
     }
 
     @Test
@@ -143,7 +143,7 @@ public class ConversionServletTest {
 
         verify(session).setAttribute(eq("bin"), eq(binaryNumber));
         verify(session).setAttribute(eq("dec"), eq("123X"));
-        verify(mockRequest).setAttribute(eq("err"), eq("Please use only valid binary numbers! "));
+        verify(mockRequest).setAttribute(eq("conversionErrorMessage"), eq("Please use only valid binary numbers! "));
     }
 
 }

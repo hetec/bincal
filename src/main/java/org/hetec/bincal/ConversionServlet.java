@@ -16,7 +16,7 @@ import org.hetc.binaryNumber.BinaryNumberFactory;
 
 @WebServlet(name = "ConversionServlet", urlPatterns = {"/convert"})
 public class ConversionServlet extends HttpServlet {
-    static final String ERROR_MESSAGE_ID = "err";
+    static final String ERROR_MESSAGE_ID = "conversionErrorMessage";
     static final String BINARY_NUMBER_PARAM = "bin";
     static final String DECIMAL_NUMBER_PARAM = "dec";
     static final String LAST_USED_PARAM = "last";

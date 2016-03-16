@@ -4,6 +4,7 @@ import org.hetc.binaryNumber.BinaryNumber;
 import org.hetc.binaryNumber.BinaryNumberFactory;
 
 import javax.inject.Inject;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,9 +27,13 @@ public class TwosComplementServlet extends HttpServlet {
 
     private static final String FIELD = "field";
     private static final String TARGET = "target";
+    private static final String ERR_MSG = "convertionErrorMessage";
+    static final String INVALID_FORMAT_EX = "Two's complement calculation on invalid binary numbers is not possible!";
+    static final String UNEXPECTED_EX = "Sorry, something went wrong :(";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String errorMsg = "";
         final String targetPage = request.getParameter(TARGET);
         RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
         HttpSession session = request.getSession(false);
@@ -42,8 +47,10 @@ public class TwosComplementServlet extends HttpServlet {
                 request.setAttribute(field, number);
                 dispatcher.forward(request,response);
             }else{
-                if(!validateInput(number)){
+                String validationMsg = validateInput(number);
+                if(!validationMsg.isEmpty()){
                     request.setAttribute(field, number);
+                    request.setAttribute(ERR_MSG, errorMsg);
                     dispatcher.forward(request,response);
                 }else{
                     request.setAttribute(field, calcTwosComplement(number));
@@ -67,8 +74,19 @@ public class TwosComplementServlet extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
     }
 
-    private boolean validateInput(String number){
-        return number.charAt(0) == '-';
+    private String validateInput(String number){
+        try{
+            factory.instanceOf(number);
+            if(number.charAt(0) != '-'){
+                return UNEXPECTED_EX;
+            }
+            return "";
+        }catch (NumberFormatException nfe){
+            return INVALID_FORMAT_EX;
+        }catch (Exception e){
+            e.printStackTrace();
+            return UNEXPECTED_EX;
+        }
     }
 
     private String removeSign(String number){

@@ -33,7 +33,7 @@ public class CalculationServlet extends HttpServlet {
     static final String NUMBER1 = "number1";
     static final String NUMBER2 = "number2";
     static final String OPERATION_PARAM = "operation";
-    static final String MESSAGE = "message";
+    static final String MESSAGE = "calculationErrorMsg";
     static final String TARGET = "calculate.jsp";
     static final String MISSING_ARGUMENTS_EX = "Two binary numbers are necessary to process a valid calculation! ";
     static final String DIVISION_BY_ZERO_EX = "Sorry, division by zero is not allowed!";
@@ -73,6 +73,10 @@ public class CalculationServlet extends HttpServlet {
             request.setAttribute(RESULT, this.calculate(bin1, bin2, operation).toSignedString());
         } catch (ArithmeticException arithEx) {
             message = DIVISION_BY_ZERO_EX;
+        } catch (IllegalArgumentException iae){
+            message = "To large number!";
+        } catch (Exception e){
+            message = "unexpected";
         }
         return message;
     }
